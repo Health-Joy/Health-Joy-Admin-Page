@@ -1,15 +1,26 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
-import Login from "./Components/Login"; // Dosya adı olarak 'Login' kullanıyoruz
-import "./Styles/Login.css";
+
+import Login from "./Components/Login";
+import MainPage from "./Components/MainPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Login />
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/main" element={<MainPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

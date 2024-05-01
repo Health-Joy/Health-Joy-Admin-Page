@@ -1,13 +1,15 @@
-// src/components/Login.js
-
 import React, { useState } from "react";
 import { loginUser } from "../Api/Auth/Auth";
-import eyeIcon from "../Icons/showpassword.png"; // Import your eye icon SVG here
+import { Navigate } from "react-router-dom";
+import eyeIcon from "../Icons/showpassword.png";
+import "../Styles/Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,16 +18,21 @@ const Login = () => {
 
       if (response.success) {
         console.log("Login successful!", response);
-        // Perform actions upon successful login
+        setIsLoggedIn(true);
       } else {
         console.error("Login failed!", response.message);
-        window.alert("Username or password is incorrect.");
+        setLoginError("Username or password is incorrect.");
       }
     } catch (error) {
       console.error("Login failed!", error.message);
-      window.alert("An error occurred while logging in.");
+      setLoginError("An error occurred while logging in.");
     }
   };
+
+  // Redirect to AdminPage if isLoggedIn is true
+  if (isLoggedIn) {
+    return <Navigate to="/main" />;
+  }
 
   return (
     <div>
@@ -55,8 +62,8 @@ const Login = () => {
               alt="Toggle password visibility"
               style={{
                 position: "absolute",
-                top: "50%",
-                right: "10px",
+                top: "30%",
+                marginLeft: "10px",
                 transform: "translateY(-50%)",
                 cursor: "pointer",
               }}
@@ -66,6 +73,7 @@ const Login = () => {
         </label>
         <br />
         <button type="submit">Login</button>
+        {loginError && <p style={{ color: "red" }}>{loginError}</p>}
       </form>
     </div>
   );
