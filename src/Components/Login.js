@@ -2,21 +2,28 @@
 
 import React, { useState } from "react";
 import { loginUser } from "../Api/Auth/Auth";
+import eyeIcon from "../Icons/showpassword.png"; // Import your eye icon SVG here
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await loginUser(email, password);
-      console.log("Login successful!", data);
-      // Perform actions upon successful login
+      const response = await loginUser(email, password);
+
+      if (response.success) {
+        console.log("Login successful!", response);
+        // Perform actions upon successful login
+      } else {
+        console.error("Login failed!", response.message);
+        window.alert("Username or password is incorrect.");
+      }
     } catch (error) {
       console.error("Login failed!", error.message);
-      setLoginError("Kullanıcı adı veya şifre hatalı.");
+      window.alert("An error occurred while logging in.");
     }
   };
 
@@ -36,16 +43,29 @@ const Login = () => {
         </label>
         <br />
         <label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
+          <div style={{ position: "relative" }}>
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <img
+              src={eyeIcon}
+              alt="Toggle password visibility"
+              style={{
+                position: "absolute",
+                top: "50%",
+                right: "10px",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+              }}
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </div>
         </label>
         <br />
         <button type="submit">Login</button>
-        {loginError && <p style={{ color: "red" }}>{loginError}</p>}
       </form>
     </div>
   );
