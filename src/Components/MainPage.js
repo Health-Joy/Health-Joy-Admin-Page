@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Main.css";
+
 const MainPage = ({ products }) => {
   return (
     <div className="landing-page">
@@ -18,6 +19,9 @@ const MainPage = ({ products }) => {
             <Link to={`/product/${product.productId}`}>
               <p>Name: {product.name}</p>
               <p>Type: {product.productType}</p>
+              <p>
+                Status: {product.isApprovedByAdmin ? "Approved" : "Pending"}
+              </p>
             </Link>
           </div>
         ))}

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./Components/MainPage";
 import ProductDetailPage from "./Components/ProductDetails"; // Corrected import path
 import { fetchNotApprovedProducts } from "./Api/Product/GetAllNotApprovedProducts";
+import LoginPage from "./Components/Login";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -25,6 +26,8 @@ function App() {
       <div className="App">
         <Routes>
           {/* Route for MainPage with products passed as props */}
+          <Route path="/" element={<LoginPage />} />
+
           <Route path="/main" element={<MainPage products={products} />} />
 
           {/* Route for ProductDetailPage with products passed as props */}

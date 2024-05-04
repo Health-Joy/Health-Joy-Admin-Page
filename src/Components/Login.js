@@ -57,20 +57,20 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
             />
-            <img
-              src={eyeIcon}
-              alt="Toggle password visibility"
-              style={{
-                position: "absolute",
-                top: "30%",
-                marginLeft: "10px",
-                transform: "translateY(-50%)",
-                cursor: "pointer",
-              }}
-              onClick={() => setShowPassword(!showPassword)}
-            />
           </div>
         </label>
+        <img
+          src={eyeIcon}
+          alt="Toggle password visibility"
+          style={{
+            position: "absolute",
+            top: "58%",
+            right: "35%",
+            transform: "translateY(-50%)",
+            cursor: "pointer",
+          }}
+          onClick={() => setShowPassword(!showPassword)}
+        />
         <br />
         <button type="submit">Login</button>
         {loginError && <p style={{ color: "red" }}>{loginError}</p>}
