@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { fetchNotApprovedProducts } from "../Api/Product/GetAllNotApprovedProducts";
-import "../Styles/Main.css"; // MainPage.css stil dosyasını import et
-
-const MainPage = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const data = await fetchNotApprovedProducts();
-      setProducts(data.response);
-    } catch (error) {
-      console.error("Error fetching products:", error.message);
-    }
-  };
-
+import React from "react";
+import { Link } from "react-router-dom";
+import "../Styles/Main.css";
+const MainPage = ({ products }) => {
   return (
     <div className="landing-page">
-      <h1>Welcome to Admin Panel</h1>
-      <p>This is your dashboard to manage everything!</p>
+      <h1 style={{ textAlign: "center" }}>
+        Welcome to Health & Joy Admin Panel
+      </h1>
+      <p style={{ textAlign: "center" }}>
+        This is your dashboard to manage everything!
+      </p>
 
       <div className="product-list">
         {products.map((product) => (
           <div key={product.productId} className="product-item">
-            <p>Name: {product.name}</p>
-            <p>Type: {product.productType}</p>
+            {/* Use Link to navigate to product detail page */}
+            <Link to={`/product/${product.productId}`}>
+              <p>Name: {product.name}</p>
+              <p>Type: {product.productType}</p>
+            </Link>
           </div>
         ))}
       </div>
