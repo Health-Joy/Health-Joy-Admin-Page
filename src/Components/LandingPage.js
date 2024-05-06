@@ -11,7 +11,7 @@ const LandingPage = () => {
       <p>Manage your products efficiently with our system.</p>
 
       <div className="button-container">
-        <Link to="/all-products">
+        <Link to="/products">
           <button className="landing-button">All Products</button>
         </Link>
         <Link to="/pending">
