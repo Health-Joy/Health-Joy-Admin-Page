@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MainPage from "./Components/MainPage";
+import PendingPage from "./Components/PendingProducts";
 import ProductDetailPage from "./Components/ProductDetails"; // Corrected import path
 import { fetchNotApprovedProducts } from "./Api/Product/GetAllNotApprovedProducts";
 import LoginPage from "./Components/Login";
+import LandingPage from "./Components/LandingPage";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -26,9 +28,11 @@ function App() {
       <div className="App">
         <Routes>
           {/* Route for MainPage with products passed as props */}
-          <Route path="/" element={<LoginPage />} />
-
-          <Route path="/main" element={<MainPage products={products} />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/pending"
+            element={<PendingPage products={products} />}
+          />
 
           {/* Route for ProductDetailPage with products passed as props */}
           <Route

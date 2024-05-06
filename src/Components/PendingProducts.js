@@ -2,16 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Main.css";
 
-const MainPage = ({ products }) => {
+const LandingPage = ({ products }) => {
   return (
     <div className="landing-page">
-      <h1 style={{ textAlign: "center" }}>
-        Welcome to Health & Joy Admin Panel
-      </h1>
-      <p style={{ textAlign: "center" }}>
-        This is your dashboard to manage everything!
-      </p>
-
       <div className="product-list">
         {products.map((product) => (
           <div key={product.productId} className="product-item">
@@ -30,4 +23,4 @@ const MainPage = ({ products }) => {
   );
 };
 
-export default MainPage;
+export default LandingPage;

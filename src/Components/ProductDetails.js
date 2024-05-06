@@ -19,11 +19,11 @@ const ProductDetailPage = ({ products }) => {
 
   const handleApprove = async () => {
     try {
-      await approveProduct(productId); // API call to approve the product
-      // Handle success (e.g., show success message, update UI)
+      await approveProduct(productId); // Ürünü onaylama API isteği
+      // Başarı durumunu işle (ör. başarı mesajı göster, UI'ı güncelle)
     } catch (error) {
-      console.error("Error approving product:", error.message);
-      // Handle error (e.g., show error message)
+      console.error("Ürün onaylama hatası:", error.message);
+      // Hata durumunu işle (ör. hata mesajı göster)
     }
   };
 
@@ -34,16 +34,31 @@ const ProductDetailPage = ({ products }) => {
     });
   };
 
-  const renderEditableField = (label, field) => (
-    <p key={label}>
-      <strong>{label}:</strong>{" "}
-      <input
-        type="text"
-        value={product[field]}
-        onChange={(e) => handleInputChange(e, field)}
-      />
-    </p>
-  );
+  const renderEditableField = (label, field) => {
+    if (field === "totalRiskValue") {
+      return (
+        <p key={label}>
+          <strong>{label}:</strong>{" "}
+          <input
+            type="text"
+            value={product[field]}
+            readOnly // İçeriği editlenemez hale getirir
+          />
+        </p>
+      );
+    }
+
+    return (
+      <p key={label}>
+        <strong>{label}:</strong>{" "}
+        <input
+          type="text"
+          value={product[field]}
+          onChange={(e) => handleInputChange(e, field)}
+        />
+      </p>
+    );
+  };
 
   const renderIngredients = () => (
     <p key="Ingredients">
@@ -73,7 +88,7 @@ const ProductDetailPage = ({ products }) => {
   return (
     <div className="product-details-container">
       <div className="product-details">
-        <h2>Product Details</h2>
+        <h2>Ürün Detayı</h2>
         {product ? (
           <div>
             {renderEditableField("Name", "name")}
@@ -90,11 +105,11 @@ const ProductDetailPage = ({ products }) => {
             {renderEditableField("Barcode No", "barcodeNo")}
             {renderIngredients()}
             <div className="buttons">
-              <button onClick={handleApprove}>Approve</button>
+              <button onClick={handleApprove}>Onayla</button>
             </div>
           </div>
         ) : (
-          <div className="loading">Loading...</div>
+          <div className="loading">Yükleniyor...</div>
         )}
       </div>
     </div>
