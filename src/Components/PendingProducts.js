@@ -7,7 +7,12 @@ const LandingPage = ({ products }) => {
     <div className="landing-page">
       <div className="product-list">
         {products.map((product) => (
-          <div key={product.productId} className="product-item">
+          <div
+            key={product.productId}
+            className={`product-item ${
+              product.isApprovedByAdmin ? "approved" : "pending"
+            }`}
+          >
             {/* Use Link to navigate to product detail page */}
             <Link to={`/product/${product.productId}`}>
               <p>Name: {product.name}</p>

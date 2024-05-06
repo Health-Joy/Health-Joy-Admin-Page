@@ -1,18 +1,12 @@
 .product-list {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(150px, 1fr)
-  ); /* Her sütunun minimum genişliği 150px olsun */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 20px;
 }
 
 @media (min-width: 768px) {
   .product-list {
-    grid-template-columns: repeat(
-      4,
-      1fr
-    ); /* Ekran genişliği 768px ve üstündeyse her satırda 4 ürün olsun */
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -36,4 +30,13 @@
 .product-item a {
   text-decoration: none;
   color: #333;
+}
+
+/* Renk durumuna göre arka plan rengi tanımlamaları */
+.product-item.approved {
+  background-color: #7eff8c; /* Yeşil */
+}
+
+.product-item.pending {
+  background-color: #ffe74c; /* Sarı */
 }
