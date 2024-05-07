@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import approveProduct from "../Api/Product/ApproveProduct";
 import "../Styles/ProductDetail.css";
 
 const ProductDetailPage = ({ products }) => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
+  const [newIngredient, setNewIngredient] = useState(""); // Yeni içerik için state
 
   useEffect(() => {
     const selectedProduct = products.find(
@@ -20,15 +22,14 @@ const ProductDetailPage = ({ products }) => {
   const handleApprove = async () => {
     try {
       const productData = {
-        ...product, // Tüm mevcut ürün verilerini kullan
-        isApproved: true, // Onaylanmış olarak işaretle
+        ...product,
+        isApproved: true,
       };
 
       await approveProduct(productId, productData);
       console.log("Ürün başarıyla onaylandı.");
-
-      // İsteği gönderdikten sonra UI'da değişiklik yapabilirsiniz
-      setProduct(productData); // Ürünü güncelle, isteği gönderildikten sonra editable alanlar kilitlenebilir
+      navigate(-1);
+      setProduct(productData);
     } catch (error) {
       console.error("Ürün onaylama hatası:", error.message);
     }
@@ -48,6 +49,24 @@ const ProductDetailPage = ({ products }) => {
       ...product,
       ingredients: updatedIngredients,
     });
+  };
+
+  const addNewIngredient = () => {
+    if (newIngredient.trim() === "") {
+      return;
+    }
+    const updatedIngredients = [
+      ...product.ingredients,
+      { name: newIngredient },
+    ];
+    setProduct({ ...product, ingredients: updatedIngredients });
+    setNewIngredient(""); // Yeni içeriği sıfırla
+  };
+
+  const removeIngredient = (index) => {
+    const updatedIngredients = [...product.ingredients];
+    updatedIngredients.splice(index, 1);
+    setProduct({ ...product, ingredients: updatedIngredients });
   };
 
   return (
@@ -90,15 +109,31 @@ const ProductDetailPage = ({ products }) => {
             </p>
             <strong>İçerikler:</strong>{" "}
             {product.ingredients.map((ingredient, index) => (
-              <span key={index}>
+              <div key={index} className="ingredient-item">
                 <input
                   type="text"
                   value={ingredient.name}
                   onChange={(e) => handleIngredientChange(e, index)}
                 />
-                {index !== product.ingredients.length - 1 ? ", " : ""}
-              </span>
+                <button
+                  className="remove-button"
+                  onClick={() => removeIngredient(index)}
+                >
+                  Sil
+                </button>
+              </div>
             ))}
+            <div>
+              <input
+                type="text"
+                value={newIngredient}
+                onChange={(e) => setNewIngredient(e.target.value)}
+                placeholder="Yeni İçerik Ekle"
+              />
+              <button className="add-button" onClick={addNewIngredient}>
+                Ekle
+              </button>
+            </div>
             <div className="buttons">
               <button onClick={handleApprove}>Onayla</button>
             </div>
