@@ -17,8 +17,8 @@ const LandingPage = () => {
         <Link to="/pending">
           <button className="landing-button secondary">Pending Products</button>
         </Link>
-        <Link to="/deleted-products">
-          <button className="landing-button secondary">Deleted Products</button>
+        <Link to="/add-ingredient">
+          <button className="landing-button secondary">Add Ingredient</button>
         </Link>
       </div>
     </div>

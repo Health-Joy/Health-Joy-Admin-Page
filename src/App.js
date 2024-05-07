@@ -9,6 +9,7 @@ import LoginPage from "./Components/Login";
 import LandingPage from "./Components/LandingPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AllProductsPage from "./Components/AllProductsPage";
+import AddIngredient from "./Components/AddIngredient";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -61,6 +62,7 @@ function App() {
             path="/product/:productId"
             element={<ProductDetailPage products={allProducts} />}
           />
+          <Route path="/add-ingredient" element={<AddIngredient />} />
         </Routes>
       </div>
     </Router>
