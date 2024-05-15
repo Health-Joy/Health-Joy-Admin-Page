@@ -1,5 +1,5 @@
 const BASE_URL =
-  "https://healthjoybackendmobile20240311152807.azurewebsites.net/api";
+  "https://healthjoybackendmobile20240515195922.azurewebsites.net/api";
 
 export const addNewIngredient = async (request) => {
   try {

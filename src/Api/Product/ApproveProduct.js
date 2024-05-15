@@ -1,5 +1,5 @@
 const API_BASE_URL =
-  "https://healthjoybackendmobile20240311152807.azurewebsites.net/api";
+  "https://healthjoybackendmobile20240515195922.azurewebsites.net/api";
 
 const approveProduct = async (productId, productData) => {
   try {

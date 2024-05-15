@@ -1,7 +1,7 @@
 // src/api/auth.js
 
 const BASE_URL =
-  "https://healthjoybackendmobile20240311152807.azurewebsites.net/api/Admin";
+  "https://healthjoybackendmobile20240515195922.azurewebsites.net/api/Admin";
 
 export const loginUser = async (email, password) => {
   try {

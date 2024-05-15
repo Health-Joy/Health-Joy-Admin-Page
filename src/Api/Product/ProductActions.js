@@ -1,7 +1,7 @@
 // ProductActions.js
 
 const BASE_URL =
-  "https://healthjoybackendmobile20240311152807.azurewebsites.net/api/Product";
+  "https://healthjoybackendmobile20240515195922.azurewebsites.net/api/Product";
 
 export const approveProduct = async (productId) => {
   try {
