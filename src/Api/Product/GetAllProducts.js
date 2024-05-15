@@ -5,7 +5,7 @@ const BASE_URL =
 
 export const fetchAllProducts = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/GetAllProducts`);
+    const response = await fetch(`${BASE_URL}/GetAllProductsAdmin`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch not approved products");
